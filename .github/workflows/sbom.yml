@@ -1,0 +1,26 @@
+name: Generate SBOM
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write           # allow the Action to upload the file
+
+jobs:
+  sbom:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create SBOM with CycloneDX
+        uses: CycloneDX/gh-cyclonedx-action@v2
+        with:
+          output: "bom.xml"           # SPDX format? use 'bom.spdx.json'
+
+      - name: Upload SBOM as build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom
+          path: bom.xml

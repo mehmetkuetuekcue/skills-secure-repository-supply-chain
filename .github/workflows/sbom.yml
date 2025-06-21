@@ -19,8 +19,10 @@ jobs:
         with:
           output-file: sbom.spdx.json         # or .cyclonedx.json, .xml, etc.
 
-      - name: Upload SBOM
+      - name: Upload SBOM as plain text
         uses: actions/upload-artifact@v4
         with:
-          name: sbom
+          name: sbom.spdx.json           # artifact name becomes the file
           path: sbom.spdx.json
+          compression-level: 0           # store, don’t zip
+

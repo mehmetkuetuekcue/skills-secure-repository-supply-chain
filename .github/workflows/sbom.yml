@@ -15,14 +15,14 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Generate SBOM with Syft
-        uses: anchore/sbom-action@v0          # ✅ maintained generic action
+        uses: anchore/sbom-action@v0          # maintained generic action
         with:
           output-file: sbom.spdx.json         # or .cyclonedx.json, .xml, etc.
 
       - name: Upload SBOM as plain text
         uses: actions/upload-artifact@v4
         with:
-          name: sbom.spdx.json           # artifact name becomes the file
+          name: sbom-artifact           # artifact name becomes the file
           path: sbom.spdx.json
           compression-level: 0           # store, don’t zip
 
